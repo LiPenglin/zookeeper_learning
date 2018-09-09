@@ -102,11 +102,19 @@ preCommit 之后，协调者宕机或者与参与者之间网络故障（网络�
 > acceptor 接收到accept 请求之后，只要Mn 不小于已接受提案最大的编号，则批准提案；
 
 ### learner 获取提案（学习策略）
+
 1. 一旦提案被批准（过半），每个acceptor 发送给所有learner；
 2. 提案批准，则统一发送给一个learner，该learner再发送给其他learner；
 3. 提案批准，则统一发送给一个learner集合，该learner集合再发送给其他learner；
 
 ### 优化
+
 > 问题：proposer1 与 proposer2 两者陷入死循环；
 
 > 解决：选出主proposer，只要主proposer 和 过半acceptor 能保持正常，那么但凡主proposer 能提出一个编号更高的提案，这个提案最终将会批准；
+
+### Advantage
+
+> 支持角色转换，很大程度上避免单点问题导致的无限等待问题与脑裂问题导致的数据不一致问题
+
+> 过半提交策略可以完善容错机制
